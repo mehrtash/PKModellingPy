@@ -121,7 +121,7 @@ class PKSolver(object):
             t = linspace(0, self.samplingRate*(p-1),p)/60
             delta= t[1] - t[0]
             result = (1/(1-self.hematocrit))*Ktrans*(
-                    convolve(self.__AIFShifted,exp(-Ktrans/ve*t))*delta)[0:len(t)]
+                convolve(self.__AIFShifted,exp(-Ktrans/ve*t))*delta)[0:len(t)]
         else:
             p = len(self.__AIF)
             t = linspace(0, self.samplingRate*(p-1),p)/60
@@ -195,8 +195,8 @@ class PKSolver(object):
             fig.set_size_inches(16,4)
             ax1 = plt.subplot(1,2,1)
             ax1.grid(True)
-            plot(t, self.__AIFShifted,'b--',label='AIF')
-            plot(t, self.__TRFShifted*3,'r--',label='TRF*3')
+            plot(t , self.__AIFShifted,':o' ,mfc='w',mec='b',ms=6 ,label='AIF shifted')
+            plot(t , self.__TRFShifted,':o' ,mfc='w',mec='r',ms=6 ,label='TRF*3 shifted')
             plt.legend(loc=0,prop={'size':14})
             ax2 = plt.subplot(1,2,2)
             ax2.grid(True)
@@ -205,12 +205,12 @@ class PKSolver(object):
             plot(t , self.__TRFShifted,'o' ,mfc='w',mec='b',ms=6 ,label='observed')
             self.mode = 'shifted'
             fitted = self.func(t , self.__ktrans, self.__ve)
-            plot(t, fitted, 'r--',label='fitted')
+            plot(t, fitted, 'r:',label='fitted')
             plt.legend(loc=0,prop={'size':14})
             rsquared = self.calculateGoodnessOfFit()
-            title('ktrans: ' + str(self.__ktrans) +  
-                  ', ve: ' + str(self.__ve)  + 
-                  ', R2: '+ str(rsquared))
+            title('ktrans: ' + "%.2f"%self.__ktrans +  
+                  ', ve: ' + "%.2f"%self.__ve + 
+                  ', R2: '+ "%.2f"%self.rSquarred)
         else:
             print 'plot error: you must run solver first'
 

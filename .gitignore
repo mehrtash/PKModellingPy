@@ -22,3 +22,5 @@ tags
 
 # Ignore windows BAT
 *.bat
+*.nrrd
+*.html
