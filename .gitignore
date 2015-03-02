@@ -24,3 +24,7 @@ tags
 *.bat
 *.nrrd
 *.html
+
+# Not label maps
+!Data/QIN_Prostate/01_label.nrrd
+!Data/QIBA_v8_Tofts_4s_0s/label.nrrd
